@@ -1,0 +1,26 @@
+.creatives_list {
+  margin: 10px; // might not required after integration
+}
+
+.creative_card {
+  border: 3px solid #E5E7EB;
+  &:hover {
+    border-color: #E0E7FF;
+    .details_section {
+      .title {
+        color: #4338CA;
+      }
+    }
+  }
+  &.selected {
+    border-color: #4338CA;
+  }
+  a:hover {
+    text-decoration: underline;
+    .details_section {
+      .title {
+        color: #4338CA;
+      }
+    }
+  }
+}

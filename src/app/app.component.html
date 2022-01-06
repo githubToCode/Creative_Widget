@@ -1,0 +1,64 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="creativeWidget">
+  <div class="creatives_list">
+    <form name="creativeList">
+      <div
+        class="grid grid-cols-5 gap-4 creative_card p-2.5 mb-2.5 rounded-xl"
+        *ngFor="let cp of creativePreviews"
+        [class.selected]="selectedCreative === cp.advertiser.id"
+      >
+        <div class="thumbnail_section flex flex-col justify-between relative">
+          <input
+            type="radio"
+            name="creativeCard"
+            class="form-radio text-indigo-700 absolute top-0 left-0"
+            [id]="cp.advertiser.id"
+            [value]="cp.advertiser.id"
+            (change)="selecCreativeCard($event)"
+          />
+          <img [src]="cp.creative.thumbnailUrl" class="m-auto p-2.5" />
+          <div class="bottom_actions text-xs flex justify-between">
+            <a href="#" target="_blank">View Set</a>
+            <span>{{cp.creative.count}} Sizes</span>
+          </div>
+        </div>
+        <div class="col-span-4 details_section">
+          <h1 class="truncate text-xl pb-2.5 title" [title]="cp.creative.name">
+            {{cp.creative.name}}
+          </h1>
+          <div class="grid grid-cols-2">
+            <div class="pr-3">
+              <h3 class="text-xs font-bold">Advertiser</h3>
+              <span class="inline-block text-sm pb-2.5"
+                >{{cp.advertiser.name}}</span
+              >
+              <h3 class="text-xs font-bold">Advertiser URL</h3>
+              <a
+                [href]="cp.advertiser.url"
+                class="inline-block text-sm break-words pb-2.5"
+                >{{cp.advertiser.url}}</a
+              >
+              <h3 class="text-xs font-bold">Landing Page URL</h3>
+              <a [href]="cp.creative.landingPageUrl" class="text-sm break-words"
+                >{{cp.creative.landingPageUrl}}</a
+              >
+            </div>
+            <div>
+              <h3 class="text-xs font-bold">Last Saved</h3>
+              <span class="inline-block text-sm pb-2.5"
+                >{{cp.creative.lastSavedDate}}
+                {{cp.creative.lastSavedTime}}</span
+              >
+              <h3 class="text-xs font-bold">Version</h3>
+              <span class="inline-block text-sm pb-2.5"
+                >{{cp.advertiser.name}}</span
+              >
+              <h3 class="text-xs font-bold">Request Type</h3>
+              <span class="text-sm">{{cp.advertiser.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

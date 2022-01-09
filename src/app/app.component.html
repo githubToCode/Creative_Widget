@@ -1,8 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="creativeWidget">
-  <div class="creatives_list">
-    <form name="creativeList">
-      <div
+  <form name="creativeList">
+    <div class="creatives_list">
+      <label
+        role="button"
+        [for]="cp.advertiser.id"
+        tabindex="0"
         class="grid grid-cols-5 gap-4 creative_card p-2.5 mb-2.5 rounded-xl"
         *ngFor="let cp of creativePreviews"
         [class.selected]="selectedCreative === cp.advertiser.id"
@@ -18,7 +21,7 @@
           />
           <img [src]="cp.creative.thumbnailUrl" class="m-auto p-2.5" />
           <div class="bottom_actions text-xs flex justify-between">
-            <a href="#" target="_blank">View Set</a>
+            <a href="#" target="_blank" role="button">View Set</a>
             <span>{{cp.creative.count}} Sizes</span>
           </div>
         </div>
@@ -34,12 +37,18 @@
               >
               <h3 class="text-xs font-bold">Advertiser URL</h3>
               <a
+                role="button"
+                target="_blank"
                 [href]="cp.advertiser.url"
                 class="inline-block text-sm break-words pb-2.5"
                 >{{cp.advertiser.url}}</a
               >
               <h3 class="text-xs font-bold">Landing Page URL</h3>
-              <a [href]="cp.creative.landingPageUrl" class="text-sm break-words"
+              <a
+                role="button"
+                target="_blank"
+                [href]="cp.creative.landingPageUrl"
+                class="text-sm break-words"
                 >{{cp.creative.landingPageUrl}}</a
               >
             </div>
@@ -58,7 +67,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </form>
-  </div>
+      </label>
+    </div>
+  </form>
 </div>

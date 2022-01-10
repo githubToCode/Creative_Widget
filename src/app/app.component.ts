@@ -11,22 +11,50 @@ import { CreativePreviewResponse } from "./types";
 export class AppComponent implements OnInit {
   creativePreviews: CreativePreviewResponse[] = [];
   selectedCreative: string = null;
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalCount: number = null;
+  loadingData: boolean = true;
 
   constructor(private appService: AppService) {}
 
   ngOnInit() {
-    this.getCreatePreviews();
+    this.creativePreviews = [];
+    const reqPayload = {
+      currentPage: this.currentPage,
+      pageSize: this.pageSize
+    };
+    this.getCreatePreviews(reqPayload);
   }
 
-  getCreatePreviews(): void {
-    this.creativePreviews = [];
-    const reqPayload = {};
+  getCreatePreviews(reqPayload): void {
+    this.loadingData = true;
     this.appService.getCreatePreviews(reqPayload).subscribe((cps) => {
-      this.creativePreviews = cps;
+      this.creativePreviews = [...this.creativePreviews, ...cps];
+      if (cps.length) {
+        this.currentPage++;
+        this.totalCount = cps[0].creative.count;
+        this.loadingData = false;
+      }
     });
   }
 
   selecCreativeCard($event): void {
     this.selectedCreative = $event.target.value;
+  }
+
+  isLastItemReceived(): boolean {
+    return this.creativePreviews.length >= this.totalCount;
+  }
+
+  onScroll() {
+    console.log("scrolled!!");
+    if (!this.isLastItemReceived() && !this.loadingData) {
+      const reqPayload = {
+        currentPage: this.currentPage,
+        pageSize: this.pageSize
+      };
+      this.getCreatePreviews(reqPayload);
+    }
   }
 }

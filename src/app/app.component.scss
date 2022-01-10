@@ -24,3 +24,13 @@
     }
   }
 }
+
+.scroll_content {
+  height: calc(100% + 0px);
+  overflow: auto;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+}

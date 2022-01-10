@@ -1,17 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="creativeWidget">
   <form name="creativeList">
-    <div class="creatives_list">
-      <label
-        role="button"
-        [for]="cp.advertiser.id"
-        tabindex="0"
+    <div
+      class="creatives_list scroll_content"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()"
+    >
+      <div
         class="grid grid-cols-5 gap-4 creative_card p-2.5 mb-2.5 rounded-xl"
-        *ngFor="let cp of creativePreviews"
+        *ngFor="let cp of creativePreviews; let i = index"
         [class.selected]="selectedCreative === cp.advertiser.id"
       >
         <div class="thumbnail_section flex flex-col justify-between relative">
           <input
+            [tabindex]="i"
             type="radio"
             name="creativeCard"
             class="form-radio text-indigo-700 absolute top-0 left-0"
@@ -67,7 +71,10 @@
             </div>
           </div>
         </div>
-      </label>
+      </div>
+      <div class="loading" *ngIf="loadingData">
+        Loading...
+      </div>
     </div>
   </form>
 </div>
